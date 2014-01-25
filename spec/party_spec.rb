@@ -3,11 +3,15 @@ require File.dirname(__FILE__) + '/spec_helper'
 include AdventureCapital
 
 describe Party do
-	it "has a property for the number of adventurers" do
+	describe ".member_count" do
+		it "counts number of adventurers recruited" do
     	party = FactoryGirl.build :party
 
-    	expect(party.respond_to?('member_count')).to eq(true)
-	    expect(party.member_count.class).to eq Fixnum
+    	expect(party.member_count).to eq(0)
+
+    	party.recruit Adventurer.new
+    	expect(party.member_count).to eq(1)
+		end
 	end
 
 	describe ".recruit" do
