@@ -19,6 +19,21 @@ describe Adventurer do
 			expect(adventurer.level).to eq 1
 		end
 	end
+
+	describe ".generate" do
+		subject(:adventurer) { Adventurer.new.generate }
+		it "generates a name" do
+			expect(adventurer.name).not_to be_nil
+			expect(adventurer.name).not_to eq ""
+		end
+
+		it "generates abilities" do
+			sum = [adventurer.dps, adventurer.health, adventurer.leadership, adventurer.knowledge, adventurer.exploration, adventurer.magic].inject(0){|aggregate, value|aggregate+=value}
+
+			expect(6..8).to cover sum
+			
+		end
+	end
 	
 	describe ".set_tendencies" do 
 		it "accepts single symbols" do

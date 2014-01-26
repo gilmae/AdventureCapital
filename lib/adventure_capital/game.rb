@@ -4,9 +4,9 @@ module AdventureCapital
 		attr_accessor :adventurers
 
 		def initialize
-			@adventurers = AdventurerBag.new
-			@employees = AdventurerBag.new 20
-			@party = Party.new
+			#@adventurers = AdventurerBag.new
+			#@employees = AdventurerBag.new 20
+			#@party = Party.new
 		end
 	end
 end
