@@ -21,17 +21,17 @@ module AdventureCapital
 
       current_tendencies = []
       current_tendencies << attributes
-      (1..6).each {
+      6.times {
 
         attributes.each do |attribute|
-          (1..method(attribute).call).each{current_tendencies << attribute}
+          (method(attribute).call).times{current_tendencies << attribute}
         end
 
         current_tendencies.flatten!
         pick_and_increase_ability current_tendencies
       }
 
-      @health+=Random.new.rand(0..2)
+      @health+=1.d(3) - 1
       @name = Names.generate_name
 
       self
