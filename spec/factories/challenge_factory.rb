@@ -13,7 +13,7 @@ FactoryGirl.define do
 	end
 
 	factory :cow_fight, class: Challenge do
-		targets {{:dps=>10}}
+		targets {{:dps=>1000}}
 		damage 1 
 	end
 end

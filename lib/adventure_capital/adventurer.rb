@@ -17,7 +17,7 @@ module AdventureCapital
     end
 
     def generate
-      attributes = base_tendencies
+      attributes = Abilities::ALL_ABILITIES
 
       current_tendencies = []
       current_tendencies << attributes
@@ -25,8 +25,9 @@ module AdventureCapital
 
         attributes.each do |attribute|
           (1..method(attribute).call).each{current_tendencies << attribute}
-          current_tendencies.flatten!
         end
+
+        current_tendencies.flatten!
         pick_and_increase_ability current_tendencies
       }
 
@@ -34,6 +35,10 @@ module AdventureCapital
       @name = Names.generate_name
 
       self
+    end
+
+    def upkeep
+      level*50
     end
 
     def give_xp xp
@@ -54,7 +59,7 @@ module AdventureCapital
       return unless can_level_up?
     	current_tendencies = @tendencies || []
   		if current_tendencies == []
-  			current_tendencies = base_tendencies
+  			current_tendencies = Abilities::ALL_ABILITIES
   		end	
 
     	pick_and_increase_ability current_tendencies
@@ -74,10 +79,6 @@ module AdventureCapital
       value = method(type).call || 0
 
       method(type.to_s + '=').call(value+1)
-    end
-
-    def base_tendencies
-      [:dps, :health, :exploration, :leadership, :knowledge, :magic] 
     end
 	end
 end

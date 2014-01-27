@@ -4,9 +4,12 @@ module AdventureCapital
 		attr_accessor :adventurers
 
 		def initialize
-			#@adventurers = AdventurerBag.new
-			#@employees = AdventurerBag.new 20
-			#@party = Party.new
+			@adventurers = []
+		end
+
+		def generate
+			25.times {@adventurers<<Adventurer.new.generate}
+			self
 		end
 	end
 end

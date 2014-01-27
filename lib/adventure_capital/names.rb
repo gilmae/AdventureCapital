@@ -19,11 +19,11 @@ module AdventureCapital
 
 		private
 		def self.load_first_names
-			@@first_names = load_words "./lib/adventure_capital/assets/first_names.txt"
+			@@first_names = load_words AdventureCapital::GAME_DIR + "/adventure_capital/assets/first_names.txt"
 		end
 
 		def self.load_traits
-			@@traits = load_words "./lib/adventure_capital/assets/traits.txt"
+			@@traits = load_words AdventureCapital::GAME_DIR +  "/adventure_capital/assets/traits.txt"
 		end
 
 		def self.load_words filename
