@@ -24,4 +24,9 @@ FactoryGirl.define do
 	factory :ranger, class: Adventurer do
 		name 'ranger'
 	end
+
+	factory :superdps, class: Adventurer do
+		name 'SuperDPS'
+		dps 20
+	end
 end
