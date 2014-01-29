@@ -1,11 +1,12 @@
 module AdventureCapital
-
 	class Party < AdventurerBag
+		attr_accessor :xp
 
 		def initialize
 			super 4
 			@buffs = {}
 			@buffs.default = 0
+			@xp = 0
 		end
 
 		def ability type

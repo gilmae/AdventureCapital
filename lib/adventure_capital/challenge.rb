@@ -1,15 +1,16 @@
 module AdventureCapital
 	class Challenge
-    attr_accessor :targets, :level, :damage
+    attr_accessor :targets, :level, :damage#, :themes
 
     def initialize
     	@targets = {}
+    	@themes = []
     end
 
     def generate level
     	@level = level
 
-    	abilities = Abilities::ALL_ABILITIES.clone
+    	abilities = Abilities::ALL_ABILITIES.clone + @themes
     	abilities.delete :health
 
     	create_target abilities
@@ -25,6 +26,8 @@ module AdventureCapital
        @targets.each{|k,v| success &= party.ability(k).d6 > v.d6}
 
        party.take_damage(@damage) unless success
+       party.xp += xp if success
+       
        success
 		end
 
@@ -46,7 +49,7 @@ module AdventureCapital
 			ability = pick_challenge_type abilities
     	abilities.delete ability
 
-    	targets[ability] = @level + 1.d4 - 2
+    	targets[ability] = [@level + 1.d4 - 2, 1].max
     end
 
 		def pick_challenge_type abilities
