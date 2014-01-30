@@ -14,7 +14,7 @@ module AdventureCapital
 
 		def defend_against party
 			@challenges.each do |challenge|
-				challenge.encounter party
+				success = challenge.encounter party
 			end
 		end
 	end

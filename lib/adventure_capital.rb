@@ -8,6 +8,7 @@ require File.dirname(__FILE__) + "/adventure_capital/game"
 require File.dirname(__FILE__) + "/adventure_capital/names"
 require File.dirname(__FILE__) + "/adventure_capital/party"
 require File.dirname(__FILE__) + "/adventure_capital/version"
+require 'logger'
 
 module AdventureCapital
   # Your code goes here...

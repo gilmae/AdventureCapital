@@ -34,6 +34,18 @@ describe Adventurer do
 			
 		end
 	end
+
+	describe ".incapacitate" do
+		subject(:adventurer) { Adventurer.new.generate }
+
+		it "incapacitates the adventurer" do
+			expect(adventurer.incapacitated?).to eq false
+
+			adventurer.incapacitate			
+
+			expect(adventurer.incapacitated?).to eq true
+		end
+	end
 	
 	describe ".set_tendencies" do 
 		it "accepts single symbols" do

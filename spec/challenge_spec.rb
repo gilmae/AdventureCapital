@@ -28,14 +28,14 @@ describe Challenge do
 			party.recruit(FactoryGirl.build :superdps)
 
 			expect(challenge.encounter(party)).to eq true
-			expect(party.ability(:health)).to eq 5
+			expect(party.health).to eq 5
 		end
 	
 		it "inflicts damage if party cannot overcome target" do
 			challenge = FactoryGirl.build :cow_fight
 	
 			expect(challenge.encounter(party)).to eq false
-			expect(party.ability(:health)).to eq 4
+			expect(party.health).to eq 4
 		end	
 	end
 
@@ -53,6 +53,22 @@ describe Challenge do
 			expect(challenge.targets[:dps]).to eq 1000
 			expect(challenge.damage).to eq 1
 			expect(challenge.xp).to eq 10
+		end
+	end
+
+	describe ".generate" do
+		it "randomly generates a damage rating" do
+			# generated damage is level.d4/2, with a minimum of 1
+			
+			damage = 0
+			2000.times do
+				c = Challenge.new.generate 6
+				damage += c.damage
+			end
+
+			damage = damage / 2000
+			
+			expect(7..8).to cover damage 
 		end
 	end
 end

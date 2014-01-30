@@ -46,7 +46,17 @@ describe Party do
 			party = FactoryGirl.build :party
 			party.recruit(FactoryGirl.build :fighter)
 
-			expect(party.ability(:dps)).to eq 2
+			expect(party.dps).to eq 2
+		end
+
+		it "will exclude incapacitated members" do
+			party = FactoryGirl.build :party
+			fighter = FactoryGirl.build :fighter
+			fighter.incapacitate
+
+			party.recruit(fighter)
+
+			expect(party.dps).to eq 0
 		end
 
 		it "will return summed values of all member" do
@@ -54,7 +64,7 @@ describe Party do
 			party.recruit(FactoryGirl.build :fighter)
 			party.recruit(FactoryGirl.build :cleric)
 
-			expect(party.ability(:dps)).to eq 3
+			expect(party.dps).to eq 3
 		end
 
 		it "will return summed values of all members correct ability" do
@@ -62,8 +72,8 @@ describe Party do
 			party.recruit(FactoryGirl.build :fighter)
 			party.recruit(FactoryGirl.build :mage)
 
-			expect(party.ability(:dps)).to eq 2
-			expect(party.ability(:magic)).to eq 4
+			expect(party.dps).to eq 2
+			expect(party.magic).to eq 4
 		end
 	end
 
@@ -72,11 +82,34 @@ describe Party do
 			party = FactoryGirl.build :party
 			party.recruit(FactoryGirl.build :fighter)
 
-			expect(party.ability(:health)).to eq 5
+			expect(party.health).to eq 5
 
 			party.take_damage 2
-			expect(party.ability(:health)).to eq 3
-     
+			expect(party.health).to eq 3
+		end
+
+		it "will incapacitate a member if damage equals or exceeds health" do
+			party = FactoryGirl.build :party
+			fighter = FactoryGirl.build :fighter
+			party.recruit(fighter)
+
+			expect(party.health).to eq 5
+
+			party.take_damage 5
+
+			expect(fighter.incapacitated?).to eq true
+		end
+
+		it "will reset damage to zero if damage equals or exceeds health" do
+			party = FactoryGirl.build :party
+			fighter = FactoryGirl.build :fighter
+			party.recruit(fighter)
+
+			expect(party.health).to eq 5
+
+			party.take_damage 5
+
+			expect(party.damage).to eq 0
 		end
 	end
 end

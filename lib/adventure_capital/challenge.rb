@@ -17,6 +17,8 @@ module AdventureCapital
 
     	create_target(abilities) if 1.d4 <= 2
 
+    	@damage = [level.d4 / 2,1].max
+
     	self
     end
 
@@ -27,7 +29,7 @@ module AdventureCapital
 
        party.take_damage(@damage) unless success
        party.xp += xp if success
-       
+
        success
 		end
 

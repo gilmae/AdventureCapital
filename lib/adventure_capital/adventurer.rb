@@ -14,6 +14,8 @@ module AdventureCapital
 
     	@level = 1
     	@xp = 0
+
+      @incapacitated = false
     end
 
     def generate
@@ -37,6 +39,14 @@ module AdventureCapital
       self
     end
 
+    def incapacitated?
+      @incapacitated
+    end
+    
+    def can_level_up?
+      @xp > @level
+    end
+
     def upkeep
       level*50
     end
@@ -51,9 +61,10 @@ module AdventureCapital
 			@tendencies = tendencies
 		end
 
-		def can_level_up?
-			@xp > @level
-		end
+    def incapacitate
+      @incapacitated = true
+    end
+
 
     def level_up
       return unless can_level_up?
