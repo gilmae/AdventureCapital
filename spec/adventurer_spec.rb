@@ -35,6 +35,21 @@ describe Adventurer do
 		end
 	end
 
+	describe ".upkeep" do
+		subject(:adventurer) { Adventurer.new.generate }
+		
+		it "increases by level" do
+			old_upkeep = adventurer.upkeep
+
+			adventurer.give_xp 10
+			adventurer.level_up
+
+			new_upkeep = adventurer.upkeep
+
+			expect(old_upkeep).to be < new_upkeep
+		end
+	end
+
 	describe ".incapacitate" do
 		subject(:adventurer) { Adventurer.new.generate }
 

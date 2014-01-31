@@ -29,4 +29,13 @@ FactoryGirl.define do
 		name 'SuperDPS'
 		dps 20
 	end
+
+	factory :overly_multi_classed, class: Adventurer do
+		dps 1
+		health 2
+		exploration 3
+		leadership 4
+		knowledge 5
+		magic 6
+	end
 end

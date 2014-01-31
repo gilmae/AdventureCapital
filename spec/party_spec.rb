@@ -77,6 +77,50 @@ describe Party do
 		end
 	end
 
+	context "Abilities" do
+		subject(:party) do
+			party = FactoryGirl.build :party
+			party.recruit(FactoryGirl.build :overly_multi_classed)
+			party
+		end		
+		
+		describe ".dps" do
+			it "should sum correct ability" do
+				expect(party.dps).to eq 1
+			end
+		end
+
+		describe ".health" do
+			it "should sum correct ability" do
+				expect(party.health).to eq 2
+			end
+		end
+
+		describe ".exploration" do
+			it "should sum correct ability" do
+				expect(party.exploration).to eq 3
+			end
+		end
+
+		describe ".leadership" do
+			it "should sum correct ability" do
+				expect(party.leadership).to eq 4
+			end
+		end
+
+		describe ".knowledge" do
+			it "should sum correct ability" do
+				expect(party.knowledge).to eq 5
+			end
+		end
+
+		describe ".magic" do
+			it "should sum correct ability" do
+				expect(party.magic).to eq 6
+			end
+		end
+	end
+
 	describe ".take_damage" do
 		it "will reduce party health by amount of damage" do
 			party = FactoryGirl.build :party
